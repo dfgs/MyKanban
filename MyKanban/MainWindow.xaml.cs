@@ -87,9 +87,11 @@ namespace MyKanban
 		}
 		protected override void OnClosed(EventArgs e)
 		{
-			notifyIcon.Visible = false;
-			notifyIcon.Dispose();
-
+			if (notifyIcon != null)
+			{
+				notifyIcon.Visible = false;
+				notifyIcon.Dispose();
+			}
 			base.OnClosed(e);
 		}
 

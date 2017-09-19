@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="MyKanban.Views.BacklogHeaderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:Views="clr-namespace:MyKanban.Views"
+			 xmlns:ViewModels="clr-namespace:MyKanban.ViewModels"
+			 xmlns:ViewLib="clr-namespace:ViewLib;assembly=ViewLib"            
+			 xmlns:dd="urn:gong-wpf-dragdrop"
+ 			 mc:Ignorable="d" 
+             d:DesignWidth="300">
+
+	
+
+
+
+    <ItemsControl ItemsSource="{Binding States}"
+					    dd:DragDrop.DropHandler="{Binding States}"
+                         dd:DragDrop.DragHandler="{Binding States}"
+					    dd:DragDrop.UseDefaultDragAdorner="True" dd:DragDrop.ItemsPanelOrientation="Horizontal"
+					    dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" >
+
+	    <ItemsControl.ItemsPanel>
+		    <ItemsPanelTemplate>
+			    <UniformGrid Columns="{Binding States.Count}" />
+		    </ItemsPanelTemplate>
+	    </ItemsControl.ItemsPanel>
+	    <ItemsControl.ItemTemplate>
+		    <DataTemplate>
+                <DockPanel  Background="#FF0078D7"  Margin="2">
+                    <Controls:DropDownButton DockPanel.Dock="Right" BorderThickness="0" ArrowBrush="White" Foreground="White" Background="Transparent" Orientation="Vertical"  FontSize="16"  >
+                        <Controls:DropDownButton.Content>
+                            <Grid >
+                                <Ellipse Width="16" Height="16" Fill="{DynamicResource AccentBaseColorBrush}" Stroke="#0099BC" StrokeThickness="1"/>
+                                <TextBlock Text="{Binding Tasks.Count}" Foreground="White" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Controls:DropDownButton.Content>
+                        <Controls:DropDownButton.Items>
+                            <MenuItem Header="New task" Command="{Binding Tasks.AddCommand}"/>
+                            <MenuItem Header="Edit state" Command="{Binding Backlog.States.EditCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="Delete state" Command="{Binding Backlog.States.RemoveCommand}" CommandParameter="{Binding}"/>
+                        </Controls:DropDownButton.Items>
+                    </Controls:DropDownButton>
+                    <TextBlock DockPanel.Dock="Left" Text="{Binding Glyph}" Foreground="White"  VerticalAlignment="Center" FontSize="26" Margin="4" FontFamily="Segoe MDL2 Assets"/>
+                    <Button  Style="{StaticResource buttonLinkStyle}"   Command="{Binding Backlog.States.EditCommand}" CommandParameter="{Binding}">
+                        <TextBlock  Style="{StaticResource textBlockLinkStyle}" Text="{Binding Name}" TextTrimming="CharacterEllipsis"  Foreground="White"  FontSize="26" Margin="4" />
+                    </Button>
+                </DockPanel>
+            </DataTemplate>
+	    </ItemsControl.ItemTemplate>
+    </ItemsControl>
+
+</UserControl>

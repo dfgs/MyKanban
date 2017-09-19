@@ -1,0 +1,39 @@
+﻿<Controls:MetroWindow x:Class="MyKanban.EditBacklogWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:Views="clr-namespace:MyKanban.Views"
+                      xmlns:ViewModels="clr-namespace:MyKanban.ViewModels"
+                      xmlns:ViewLib="clr-namespace:ViewLib;assembly=ViewLib"
+                      xmlns:ViewModelLib="clr-namespace:ViewModelLib;assembly=ViewModelLib"
+                      Title="Edit backlog" WindowStartupLocation="CenterScreen" SizeToContent="Height"
+                      Width="320">
+
+
+
+    <StackPanel>
+        <TextBlock Margin="8,8,8,0" Text="Name:" />
+        <TextBox Margin="8,0,8,0" Text="{Binding [Name].Value, UpdateSourceTrigger=PropertyChanged}" Controls:TextBoxHelper.Watermark="Backlog's name"/>
+
+        <TextBlock Margin="8,8,8,0" Text="Glyph:" />
+        <ListBox ItemsSource="{Binding ViewModel.Glyphs}" SelectedItem="{Binding [Glyph].Value}" Margin="8,0,8,0"
+                 VirtualizingPanel.IsVirtualizing="true" 
+                VirtualizingPanel.VirtualizationMode="Recycling"
+                 FontFamily="Segoe MDL2 Assets" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="100" FontSize="16">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Views:VirtualizingWrapPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+
+        <StackPanel Margin="4" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Margin="4" Content="OK" Width="80" Command="{Binding OKCommand}"/>
+            <Button Margin="4" Content="Cancel" Width="80" Command="{Binding CancelCommand}"/>
+            <Button Margin="4" Content="Apply" Width="80" Command="{Binding ApplyCommand}"/>
+        </StackPanel>
+
+
+    </StackPanel>
+
+</Controls:MetroWindow>

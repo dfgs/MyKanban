@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="MyKanban.Views.TasksView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Views="clr-namespace:MyKanban.Views"
+             xmlns:ViewLib="clr-namespace:ViewLib;assembly=ViewLib"
+             xmlns:dd="urn:gong-wpf-dragdrop"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <DataTemplate x:Key="dragTemplate">
+            <Views:TaskView Width="250"/>
+        </DataTemplate>
+        <ViewLib:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+    </UserControl.Resources>
+    <DockPanel Margin="2" Background="#FFF2F2F2">
+        <DockPanel.Style>
+            <Style TargetType="{x:Type DockPanel}">
+                <Setter Property="Views:MouseFocus.IsCellFocused" Value="False"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Views:MouseFocus.IsCellFocused" Value="True"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </DockPanel.Style>
+        
+        <Button Margin="4" DockPanel.Dock="Bottom" HorizontalAlignment="Center" VerticalAlignment="Center"  
+                Visibility="{Binding RelativeSource={RelativeSource Self},Path=(Views:MouseFocus.IsCellFocused),Converter={StaticResource boolToVisibilityConverter}}"
+                Command="{Binding Tasks.AddCommand}" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}">
+            <TextBlock FontSize="24"  FontFamily="Segoe MDL2 Assets" Text="" Margin="4" />
+        </Button>
+        <ItemsControl ItemsSource="{Binding Tasks}" Background="Transparent"
+            dd:DragDrop.DragAdornerTemplate="{StaticResource ResourceKey=dragTemplate}"               
+            dd:DragDrop.DragHandler="{Binding Tasks}"
+            dd:DragDrop.DropHandler="{Binding Tasks}"
+            dd:DragDrop.IsDragSource="True" 
+ 		    dd:DragDrop.IsDropTarget="True" >
+
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Views:TaskView>
+                        <Views:TaskView.Effect>
+                            <DropShadowEffect BlurRadius="10" Opacity="0.5"/>
+                        </Views:TaskView.Effect>
+                    </Views:TaskView>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+         </ItemsControl>
+
+         
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,19 @@
+﻿<Controls:MetroWindow x:Class="MyKanban.AboutWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      Title="About" WindowStartupLocation="CenterOwner"
+                      Height="240" Width="500" ResizeMode="NoResize">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Image Source="Images/Zoidberg.ico" Width="64" Height="64"/>
+            <TextBlock Text="MyKanban (c) Marc GUICHARD" VerticalAlignment="Center" FontSize="26" Foreground="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}"/>
+        </StackPanel>
+        <TextBlock TextDecorations="Underline" Text="This program uses third party libraries:"/>
+        <TextBlock Text="   * Mahapps Metro framework" />
+        <TextBlock Text="   * Gong Solutions Drag and Drop framework" />
+        <TextBlock Text="   * Extended WPF toolkit framework" />
+        <TextBlock Text="Relative licence clauses are attached into the binary folder"/>
+    </StackPanel>
+
+</Controls:MetroWindow>

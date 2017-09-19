@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="MyKanban.Views.TaskView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:Views="clr-namespace:MyKanban.Views"
+			 xmlns:ViewModels="clr-namespace:MyKanban.ViewModels"
+			 xmlns:ViewLib="clr-namespace:ViewLib;assembly=ViewLib"
+             mc:Ignorable="d" 
+             d:DesignHeight="64" d:DesignWidth="250" >
+	<UserControl.Resources>
+		<ResourceDictionary>
+            <ViewLib:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+            <Views:ElapsedTimeConverter x:Key="elapsedTimeConverter"/>
+			<Views:SecondsToVisibilityConverter x:Key="secondsToVisibilityConverter"/>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+
+
+	<Border Margin="4" Background="White" BorderBrush="{x:Null}" BorderThickness="0"   >
+		<Border.Style>
+			<Style TargetType="{x:Type Border}">
+				<Setter Property="Views:MouseFocus.IsCellFocused" Value="False"/>
+				<Style.Triggers>
+					<Trigger Property="IsMouseOver" Value="True">
+						<Setter Property="Views:MouseFocus.IsCellFocused" Value="True"/>
+					</Trigger>
+				</Style.Triggers>
+			</Style>
+		</Border.Style>
+
+		<DockPanel >
+			<Border DockPanel.Dock="Left" Width="8" Background="{Binding Color.Value,FallbackValue=OrangeRed}" BorderBrush="{x:Null}" BorderThickness="0"/>
+			<StackPanel>
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,4,0" DockPanel.Dock="Right">
+                        <StackPanel.Style>
+                            <Style TargetType="{x:Type StackPanel}">
+                                <Setter Property="Visibility" Value="{Binding RelativeSource={RelativeSource Self},Path=(Views:MouseFocus.IsCellFocused),Converter={StaticResource boolToVisibilityConverter}}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsRunning}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                        
+ 
+                        <Button   VerticalAlignment="Center"
+                                Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}"
+                            Command="{Binding StartStopCommand}">
+                            <TextBlock Text="{Binding Glyph}" Margin="4" FontFamily="Segoe MDL2 Assets"/>
+                        </Button>
+                       
+                        <TextBlock Margin="4,0,0,0" Text="{Binding ElapsedTime,FallbackValue=0,Converter={StaticResource elapsedTimeConverter}}"
+							Foreground="LightGray"
+							VerticalAlignment="Center" FontStyle="Italic" FontWeight="Bold" />
+
+                    </StackPanel>
+
+
+
+
+                    <Button Style="{StaticResource buttonLinkStyle}" HorizontalAlignment="Left" Margin="4" 
+                            Command="{Binding State.Tasks.EditCommand}" CommandParameter="{Binding}">
+                        <TextBlock Style="{StaticResource textBlockLinkStyle}" Text="{Binding Title,FallbackValue=Title}"  TextTrimming="CharacterEllipsis" Foreground="Black"  FontSize="18" />
+                    </Button>
+
+                </DockPanel>
+
+
+                <TextBlock ToolTip="{Binding Description}" Text="{Binding Description}"  Margin="4"
+							TextWrapping="WrapWithOverflow" MaxHeight="64" 
+							Foreground="DarkGray" FontFamily="Segoe UI" FontSize="14"/>
+
+			</StackPanel>
+
+		</DockPanel>
+	</Border>
+</UserControl>

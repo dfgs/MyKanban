@@ -1,0 +1,66 @@
+﻿<Controls:MetroWindow x:Class="MyKanban.SettingsWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:Views="clr-namespace:MyKanban.Views"
+                      xmlns:ViewModels="clr-namespace:MyKanban.ViewModels"
+                      xmlns:ViewLib="clr-namespace:ViewLib;assembly=ViewLib"
+                      xmlns:ViewModelLib="clr-namespace:ViewModelLib;assembly=ViewModelLib"
+                      Title="Settings" WindowStartupLocation="CenterScreen"
+                      Height="480"
+                      Width="640">
+    <Controls:MetroWindow.Resources>
+        <DataTemplate DataType="{x:Type ViewModels:BacklogViewModel}">
+            <TextBlock Text="{Binding Name}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:StateViewModel}">
+            <TextBlock Text="{Binding Name}"/>
+        </DataTemplate>
+        <ViewModelLib:ViewModelSchemaConverter x:Key="viewModelSchemaConverter"/>
+    </Controls:MetroWindow.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static ViewLib:RoutedCommands.OK}" Executed="OKCommandBinding_Executed" CanExecute="OKCommandBinding_CanExecute"/>
+        <CommandBinding Command="{x:Static ViewLib:RoutedCommands.Cancel}" Executed="CancelCommandBinding_Executed" CanExecute="CancelCommandBinding_CanExecute"/>
+        <CommandBinding Command="{x:Static ViewLib:RoutedCommands.Apply}" Executed="ApplyCommandBinding_Executed" CanExecute="ApplyCommandBinding_CanExecute"/>
+    </Window.CommandBindings>
+    
+    <Grid DataContext="{Binding Backlogs}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Backlogs">
+            <Views:GenericListView Grid.Column="0"/>
+        </GroupBox>
+
+        <DockPanel Grid.Column="1">
+            <GroupBox DockPanel.Dock="Top" Header="Properties">
+                <ViewLib:EditControl x:Name="editBacklogControl" DataContext="{Binding SelectedItem,Converter={StaticResource ResourceKey=viewModelSchemaConverter}}"/>
+            </GroupBox>
+            <GroupBox Header="States">
+                <Grid DataContext="{Binding SelectedItem.States}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Views:GenericListView Grid.Column="0"/>
+                    <ViewLib:EditControl x:Name="editStateControl" Grid.Column="1" DataContext="{Binding SelectedItem,Converter={StaticResource ResourceKey=viewModelSchemaConverter}}"/>
+                </Grid>
+            </GroupBox>
+
+        </DockPanel>
+  
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Margin="4" Content="OK" Width="100" Command="{x:Static ViewLib:RoutedCommands.OK}"/>
+            <Button Margin="4" Content="Cancel" Width="100" Command="{x:Static ViewLib:RoutedCommands.Cancel}"/>
+            <Button Margin="4" Content="Apply" Width="100" Command="{x:Static ViewLib:RoutedCommands.Apply}"/>
+        </StackPanel>
+    </Grid>
+        
+</Controls:MetroWindow>

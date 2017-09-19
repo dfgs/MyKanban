@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyKanban", "MyKanban\MyKanban.csproj", "{BC6D6FF0-7522-4892-AA9C-E2DE621EBFA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelLib", "..\MVVMLib\ModelLib\ModelLib.csproj", "{360B1F0A-1582-4979-91F0-E323B0B65E2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewLib", "..\MVVMLib\ViewLib\ViewLib.csproj", "{EC7CAA89-CE12-41C9-AA61-238C5E8B55C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModelLib", "..\MVVMLib\ViewModelLib\ViewModelLib.csproj", "{1606EC93-34CA-4F3C-B703-B388B8A56AC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizardLib", "..\WizardLib\WizardLib\WizardLib.csproj", "{0DFAC2F8-8EB2-4405-87BF-B242A49BFE63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseUpgraderLib", "..\MVVMLib\DatabaseUpgraderLib\DatabaseUpgraderLib.csproj", "{DAB4CCAA-92DE-4D6C-912C-E561D2321252}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlCEDatabaseUpgraderLib", "..\MVVMLib\SqlCEDatabaseUpgraderLib\SqlCEDatabaseUpgraderLib.csproj", "{49E2D1DC-3F40-42BC-8DCB-C94C6FCAF598}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlCEDatabaseModelLib", "..\MVVMLib\SqlCEDatabaseModelLib\SqlCEDatabaseModelLib.csproj", "{6584BAA0-35C4-41C1-AF54-599403ACDADB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseModelLib", "..\MVVMLib\DatabaseModelLib\DatabaseModelLib.csproj", "{5D765243-DB53-4E4A-9101-881A4024B3B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVVMLib", "MVVMLib", "{94345C7C-99B9-4DE9-A907-6A45E862B276}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseViewModelLib", "..\MVVMLib\DatabaseViewModelLib\DatabaseViewModelLib.csproj", "{1FD96E06-A9B1-4DA4-94A6-E35862C4A778}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC6D6FF0-7522-4892-AA9C-E2DE621EBFA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC6D6FF0-7522-4892-AA9C-E2DE621EBFA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC6D6FF0-7522-4892-AA9C-E2DE621EBFA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC6D6FF0-7522-4892-AA9C-E2DE621EBFA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{360B1F0A-1582-4979-91F0-E323B0B65E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{360B1F0A-1582-4979-91F0-E323B0B65E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{360B1F0A-1582-4979-91F0-E323B0B65E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{360B1F0A-1582-4979-91F0-E323B0B65E2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC7CAA89-CE12-41C9-AA61-238C5E8B55C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC7CAA89-CE12-41C9-AA61-238C5E8B55C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC7CAA89-CE12-41C9-AA61-238C5E8B55C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC7CAA89-CE12-41C9-AA61-238C5E8B55C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1606EC93-34CA-4F3C-B703-B388B8A56AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1606EC93-34CA-4F3C-B703-B388B8A56AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1606EC93-34CA-4F3C-B703-B388B8A56AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1606EC93-34CA-4F3C-B703-B388B8A56AC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DFAC2F8-8EB2-4405-87BF-B242A49BFE63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DFAC2F8-8EB2-4405-87BF-B242A49BFE63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DFAC2F8-8EB2-4405-87BF-B242A49BFE63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DFAC2F8-8EB2-4405-87BF-B242A49BFE63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAB4CCAA-92DE-4D6C-912C-E561D2321252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAB4CCAA-92DE-4D6C-912C-E561D2321252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAB4CCAA-92DE-4D6C-912C-E561D2321252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAB4CCAA-92DE-4D6C-912C-E561D2321252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49E2D1DC-3F40-42BC-8DCB-C94C6FCAF598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49E2D1DC-3F40-42BC-8DCB-C94C6FCAF598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49E2D1DC-3F40-42BC-8DCB-C94C6FCAF598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49E2D1DC-3F40-42BC-8DCB-C94C6FCAF598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6584BAA0-35C4-41C1-AF54-599403ACDADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6584BAA0-35C4-41C1-AF54-599403ACDADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6584BAA0-35C4-41C1-AF54-599403ACDADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6584BAA0-35C4-41C1-AF54-599403ACDADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D765243-DB53-4E4A-9101-881A4024B3B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D765243-DB53-4E4A-9101-881A4024B3B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D765243-DB53-4E4A-9101-881A4024B3B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D765243-DB53-4E4A-9101-881A4024B3B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FD96E06-A9B1-4DA4-94A6-E35862C4A778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD96E06-A9B1-4DA4-94A6-E35862C4A778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD96E06-A9B1-4DA4-94A6-E35862C4A778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD96E06-A9B1-4DA4-94A6-E35862C4A778}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{360B1F0A-1582-4979-91F0-E323B0B65E2C} = {94345C7C-99B9-4DE9-A907-6A45E862B276}
+		{EC7CAA89-CE12-41C9-AA61-238C5E8B55C6} = {94345C7C-99B9-4DE9-A907-6A45E862B276}
+		{1606EC93-34CA-4F3C-B703-B388B8A56AC6} = {94345C7C-99B9-4DE9-A907-6A45E862B276}
+		{DAB4CCAA-92DE-4D6C-912C-E561D2321252} = {94345C7C-99B9-4DE9-A907-6A45E862B276}
+		{49E2D1DC-3F40-42BC-8DCB-C94C6FCAF598} = {94345C7C-99B9-4DE9-A907-6A45E862B276}
+		{6584BAA0-35C4-41C1-AF54-599403ACDADB} = {94345C7C-99B9-4DE9-A907-6A45E862B276}
+		{5D765243-DB53-4E4A-9101-881A4024B3B5} = {94345C7C-99B9-4DE9-A907-6A45E862B276}
+		{1FD96E06-A9B1-4DA4-94A6-E35862C4A778} = {94345C7C-99B9-4DE9-A907-6A45E862B276}
+	EndGlobalSection
+EndGlobal

@@ -12,7 +12,7 @@ namespace MyKanban
         public static List<string> Glyphs;
 
 
-        static Helper()
+        static Helper() 
         {
             FontFamily family;
             GlyphTypeface glyph;

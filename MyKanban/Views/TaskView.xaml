@@ -64,7 +64,7 @@
 
                     <Button Style="{StaticResource buttonLinkStyle}" HorizontalAlignment="Left" Margin="4" 
                             Command="{Binding State.Tasks.EditCommand}" CommandParameter="{Binding}">
-                        <TextBlock Style="{StaticResource textBlockLinkStyle}" Text="{Binding Title,FallbackValue=Title}"  TextTrimming="CharacterEllipsis" Foreground="Black"  FontSize="18" />
+						<TextBlock Style="{StaticResource textBlockLinkStyle}" Text="{Binding Title,FallbackValue=Title}"  TextTrimming="CharacterEllipsis" Foreground="Black"  FontSize="18" />
                     </Button>
 
                 </DockPanel>

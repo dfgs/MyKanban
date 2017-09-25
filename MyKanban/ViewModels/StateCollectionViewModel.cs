@@ -28,7 +28,12 @@ namespace MyKanban.ViewModels
             return new EditStateWindow();
         }
 
-        protected override Task<State> OnCreateEmptyModelAsync()
+		public override async System.Threading.Tasks.Task OnEditCommandExecuted(StateViewModel ViewModel)
+		{
+			await ViewModel.LoadAsync();
+		}
+
+		protected override Task<State> OnCreateEmptyModelAsync()
 		{
 			return System.Threading.Tasks.Task.FromResult(new State() { Name="New state", BacklogID=backlog.BacklogID,Index=Count });
 		}
@@ -70,34 +75,33 @@ namespace MyKanban.ViewModels
 
 		public async void Drop(IDropInfo dropInfo)
 		{
-			StateViewModel state;
+			StateViewModel movedState;
 			int index;
+			int insertIndex;
 
-			state = dropInfo.Data as StateViewModel;
-			if (state == null) return;
-			index = IndexOf(state);
+			movedState = dropInfo.Data as StateViewModel;
+			if (movedState == null) return;
 
+			if (dropInfo.InsertPosition == RelativeInsertPosition.AfterTargetItem) insertIndex = dropInfo.InsertIndex - 1;
+			else insertIndex = dropInfo.InsertIndex;
 
-			if (index < dropInfo.InsertIndex)
+			index = 0;
+			foreach(StateViewModel state in this)
 			{
-
-				await AddAsync(dropInfo.InsertIndex, state, false);
-				await RemoveAsync(state, false);
-			}
-			else
-			{
-
-				await RemoveAsync(state, false);
-				await AddAsync(dropInfo.InsertIndex, state, false);
-			}
-
-			for (int t = 0; t < Count; t++)
-			{
-				this[t].Index = t;
-				await Database.UpdateAsync(this[t].Model);
+				if (index == insertIndex) index++;
+				if (state == movedState)
+				{
+					state.Index = insertIndex;
+				}
+				else
+				{
+					state.Index = index;
+					index++;
+				}
+				await Database.UpdateAsync(state.Model);
 			}
 
-			//throw new NotImplementedException();
+			await LoadAsync();
 		}
         #endregion
 

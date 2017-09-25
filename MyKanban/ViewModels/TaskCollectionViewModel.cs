@@ -10,6 +10,9 @@ using System.Windows;
 using DatabaseModelLib.Filters;
 using DatabaseViewModelLib;
 using MyKanban.Models;
+using SqlCEDatabaseModelLib;
+using System.Data.SqlServerCe;
+using DatabaseModelLib;
 
 namespace MyKanban.ViewModels
 {
@@ -28,7 +31,14 @@ namespace MyKanban.ViewModels
         {
             return new EditTaskWindow();
         }
-        protected override Task<Models.Task> OnCreateEmptyModelAsync()
+
+		protected override async Task<bool> OnEditInModelAsync(TaskViewModel ViewModel)
+		{
+			ViewModel.UpdateDate = DateTime.Now;
+			return await base.OnEditInModelAsync(ViewModel);
+		}
+
+		protected override Task<Models.Task> OnCreateEmptyModelAsync()
         {
             return System.Threading.Tasks.Task.FromResult(new Models.Task() {StateID=state.StateID,Index=Count });
 
@@ -38,14 +48,31 @@ namespace MyKanban.ViewModels
             return System.Threading.Tasks.Task.FromResult(new TaskViewModel(Database,backlog));
         }
 
-		
+
 		protected override Filter<Models.Task> OnCreateFilter()
         {
-            return new EqualFilter<Models.Task>(Models.Task.StateIDColumn, state.StateID);
+			DateTime minUpdateDate;
+
+			if (state.MaxTaskAge==null) minUpdateDate = DateTime.Now.AddDays(-36500);
+			else minUpdateDate = DateTime.Now.AddDays(-state.MaxTaskAge.Value);
+
+			return new AndFilter<Models.Task>( 
+				new AndFilter<Models.Task>(
+					new EqualFilter<Models.Task>(Models.Task.StateIDColumn, state.StateID),
+					new GreaterOrEqualFilter<Models.Task>(Models.Task.UpdateDateColumn, minUpdateDate)
+				)
+			);
         }
 
-        #region IDropTarget
-        public void DragOver(IDropInfo dropInfo)
+		protected override IColumn<Models.Task>[] OnCreateOrders()
+		{
+			return new IColumn<Models.Task>[] { Models.Task.IndexColumn };
+		}
+
+	
+
+		#region IDropTarget
+		public void DragOver(IDropInfo dropInfo)
         {
             if (dropInfo.Data is TaskViewModel) 
             {
@@ -56,44 +83,43 @@ namespace MyKanban.ViewModels
 
         public async void Drop(IDropInfo dropInfo)
         {
-            TaskViewModel task;
-            TaskCollectionViewModel sourceTasks;
-            int index;
+			TaskCollectionViewModel sourceTasks;
+			TaskViewModel movedTask;
+			int index;
+			int insertIndex;
 
-            task = dropInfo.Data as TaskViewModel;
-            if (task == null) return;
+			
+			movedTask = dropInfo.Data as TaskViewModel;
+            if (movedTask == null) return;
 
-            sourceTasks = task.State.Tasks;
+			sourceTasks = movedTask.State.Tasks;
 
-            if (sourceTasks == this)
-            {
-                index = this.IndexOf(task);
-                if (index < dropInfo.InsertIndex)
-                {
-                    await this.AddAsync(dropInfo.InsertIndex, task, false);
-                    await sourceTasks.RemoveAsync(task, false);
-                }
-                else
-                {
-                    await sourceTasks.RemoveAsync(task, false);
-                    await this.AddAsync(dropInfo.InsertIndex, task, false);
-                }
-            }
-            else
-            {
-                await sourceTasks.RemoveAsync(task, false);
-                await this.AddAsync(dropInfo.InsertIndex, task, false);
-            }
+			if ((sourceTasks==this) && (dropInfo.InsertPosition == RelativeInsertPosition.AfterTargetItem)) insertIndex = dropInfo.InsertIndex - 1;
+			else insertIndex = dropInfo.InsertIndex;
 
-            task.StateID = this.state.StateID;
-            task.Index = dropInfo.InsertIndex;
+			movedTask.StateID = this.state.StateID;
+			movedTask.Index = insertIndex;
+			movedTask.UpdateDate = DateTime.Now;
+			await Database.UpdateAsync(movedTask.Model);
+
+			index = 0;
+			foreach (TaskViewModel task in this)
+			{
+				if (index == insertIndex) index++;
+				if (task == movedTask) continue;
+
+				task.Index = index;
+				task.UpdateDate = DateTime.Now;
+				index++;
+
+				
+				await Database.UpdateAsync(task.Model);
+			}
 
 
-            for (int t = 0; t < this.Count; t++)
-            {
-                this[t].Index = t;
-                await this.backlog.Database.UpdateAsync(this[t].Model);
-            }
+			if (sourceTasks!=this) await sourceTasks.LoadAsync();
+			await LoadAsync();
+
         }
         #endregion
 

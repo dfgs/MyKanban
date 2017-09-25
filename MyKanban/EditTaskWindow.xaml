@@ -23,7 +23,10 @@
         <TextBlock Margin="8,8,8,0" Text="Color:" />
         <tk:ColorPicker  Margin="8,0,8,0" SelectedColor="{Binding [Color].Value}" ShowRecentColors="True" DisplayColorAndName="True" />
 
-        <StackPanel Margin="4" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+		<TextBlock Margin="8,8,8,0" Text="Creation date:" />
+		<TextBox  Margin="8,0,8,0" Text="{Binding [CreationDate].Value}" IsReadOnly="True"  />
+
+		<StackPanel Margin="4" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Margin="4" Content="OK" Width="80" Command="{Binding OKCommand}"/>
             <Button Margin="4" Content="Cancel" Width="80" Command="{Binding CancelCommand}"/>
             <Button Margin="4" Content="Apply" Width="80" Command="{Binding ApplyCommand}"/>

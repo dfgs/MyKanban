@@ -22,16 +22,8 @@ namespace MyKanban.Wizards
 
 		private async Task<bool> CreateDatabase()
 		{
-			try
-			{
-				await Data.CreateDatabaseAsync();
-				return true;
-			}
-			catch
-			{
-				return false;
-			}
-
+			await Data.CreateDatabaseAsync();
+			return true;
 			
 		}
 

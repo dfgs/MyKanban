@@ -50,6 +50,14 @@ namespace MyKanban.ViewModels
             set { Model.Glyph = value; OnPropertyChanged(); }
         }
 
+
+		[IntProperty(Header = "MaxTaskAge", IsMandatory = false, IsReadOnly = false,MinValue = 0)]
+		public int? MaxTaskAge
+		{
+			get { return Model.MaxTaskAge; }
+			set { Model.MaxTaskAge = value; OnPropertyChanged(); }
+		}
+
         private BacklogViewModel backlog;
 
         private TaskCollectionViewModel tasks;
@@ -85,6 +93,7 @@ namespace MyKanban.ViewModels
             return System.Threading.Tasks.Task.FromResult(Model);
         }
 
+		
 
-    }
+	}
 }

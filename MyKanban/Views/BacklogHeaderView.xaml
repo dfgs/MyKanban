@@ -46,7 +46,7 @@
                     <Button  Style="{StaticResource buttonLinkStyle}"   Command="{Binding Backlog.States.EditCommand}" CommandParameter="{Binding}">
                         <TextBlock  Style="{StaticResource textBlockLinkStyle}" Text="{Binding Name}" TextTrimming="CharacterEllipsis"  Foreground="White"  FontSize="26" Margin="4" />
                     </Button>
-                </DockPanel>
+				</DockPanel>
             </DataTemplate>
 	    </ItemsControl.ItemTemplate>
     </ItemsControl>

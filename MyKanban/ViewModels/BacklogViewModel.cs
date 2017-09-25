@@ -118,6 +118,11 @@ namespace MyKanban.ViewModels
 
         }
 
-    }
+		public override bool IsModelEqualTo(Backlog Other)
+		{
+			return BacklogID == Other.BacklogID;
+		}
+
+	}
 
 }

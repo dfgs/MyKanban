@@ -52,7 +52,18 @@ namespace MyKanban.ViewModels
 			get { return Model.Color; }
 			set { Model.Color = value; OnPropertyChanged(); }
 		}
-
+		[TextProperty(Header = "Creation date", IsMandatory = false, IsReadOnly = true)]
+		public DateTime? CreationDate
+		{
+			get { return Model.CreationDate; }
+			set { Model.CreationDate = value; OnPropertyChanged(); }
+		}
+		[TextProperty(Header = "Update date", IsMandatory = false, IsReadOnly = true)]
+		public DateTime? UpdateDate
+		{
+			get { return Model.UpdateDate; }
+			set { Model.UpdateDate = value; OnPropertyChanged(); }
+		}
 
 		public DateTime? StartDate
 		{

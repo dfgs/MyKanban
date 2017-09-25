@@ -45,5 +45,15 @@ namespace MyKanban.Models
             get { return GlyphColumn.GetValue(this); }
             set { GlyphColumn.SetValue(this, value); }
         }
-    }
+
+		[Revision(2)]
+		public static readonly Column<State, int> MaxTaskAgeColumn = new Column<State, int>() {IsNullable=true };
+		public int? MaxTaskAge
+		{
+			get { return MaxTaskAgeColumn.GetValue(this); }
+			set { MaxTaskAgeColumn.SetValue(this, value); }
+		}
+
+
+	}
 }

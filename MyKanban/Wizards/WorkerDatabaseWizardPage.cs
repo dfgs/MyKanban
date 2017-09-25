@@ -1,4 +1,5 @@
-﻿using SqlCEDatabaseUpgraderLib;
+﻿using ModelLib;
+using SqlCEDatabaseUpgraderLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,9 @@ namespace MyKanban.Wizards
 			get { return (RunStatus)GetValue(StatusProperty); }
 			private set { SetValue(StatusProperty, value); }
 		}
+
+
+		
 
 		public WorkerDatabaseWizardPage(string Header,string Title,Func<Task<bool>> Action)
 		{

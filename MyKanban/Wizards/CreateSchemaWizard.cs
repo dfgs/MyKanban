@@ -22,16 +22,8 @@ namespace MyKanban.Wizards
 
 		private async Task<bool> CreateSchema()
 		{
-			try
-			{
-				await Data.CreateSchemaAsync();
-				return true;
-			}
-			catch
-			{
-				return false;
-			}
-
+			await Data.CreateSchemaAsync();
+			return true;
 			
 		}
 

@@ -6,7 +6,8 @@
                       xmlns:ViewModels="clr-namespace:MyKanban.ViewModels"
                       xmlns:ViewLib="clr-namespace:ViewLib;assembly=ViewLib"
                       xmlns:ViewModelLib="clr-namespace:ViewModelLib;assembly=ViewModelLib"
-                      Title="Edit state" WindowStartupLocation="CenterScreen" SizeToContent="Height"
+                    	xmlns:tk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                       Title="Edit state" WindowStartupLocation="CenterScreen" SizeToContent="Height"
                       Width="320">
 
   
@@ -26,8 +27,12 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        
-        <StackPanel Margin="4" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+
+		<TextBlock Margin="8,8,8,0" Text="Max task age:" />
+		<tk:IntegerUpDown Margin="8,0,8,0" Value="{Binding [MaxTaskAge].Value, UpdateSourceTrigger=PropertyChanged}" Controls:TextBoxHelper.Watermark="Max task age" Minimum="0"/>
+
+		
+		<StackPanel Margin="4" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Margin="4" Content="OK" Width="80" Command="{Binding OKCommand}"/>
             <Button Margin="4" Content="Cancel" Width="80" Command="{Binding CancelCommand}"/>
             <Button Margin="4" Content="Apply" Width="80" Command="{Binding ApplyCommand}"/>

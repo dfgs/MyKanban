@@ -26,15 +26,8 @@ namespace MyKanban.Wizards
 
 		private async Task<bool> UpgradeDatabase()
 		{
-			try
-			{
-				await Data.UpgradeAsync();
-				return true;
-			}
-			catch
-			{
-				return false;
-			}
+			await Data.UpgradeAsync();
+			return true;
 		}
 		private async Task<bool> BackupDatabase()
 		{

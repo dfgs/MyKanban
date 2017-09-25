@@ -25,7 +25,22 @@ namespace MyKanban.Models
 			set { BacklogIDColumn.SetValue(this, value); }
 		}*/
 
-		
+		[Revision(2)]
+		public static readonly Column<Task, DateTime> CreationDateColumn = new Column<Task, DateTime>() { DefaultValue = DateTime.Now };
+		public DateTime? CreationDate
+		{
+			get { return CreationDateColumn.GetValue(this); }
+			set { CreationDateColumn.SetValue(this, value); }
+		}
+
+		[Revision(3)]
+		public static readonly Column<Task, DateTime> UpdateDateColumn = new Column<Task, DateTime>() { DefaultValue = DateTime.Now };
+		public DateTime? UpdateDate
+		{
+			get { return UpdateDateColumn.GetValue(this); }
+			set { UpdateDateColumn.SetValue(this, value); }
+		}
+
 		public static readonly Column<Task, int> StateIDColumn = new Column<Task, int>();
 		public int? StateID
 		{
@@ -83,5 +98,10 @@ namespace MyKanban.Models
 			set { ElapsedTimeColumn.SetValue(this, value); }
 		}
 
+		public Task()
+		{
+			CreationDate = DateTime.Now;
+			UpdateDate = DateTime.Now;
+		}
 	}
 }

@@ -32,6 +32,7 @@ namespace MyKanban.ViewModels
             return new EditTaskWindow();
         }
 
+		
 		protected override async Task<bool> OnEditInModelAsync(TaskViewModel ViewModel)
 		{
 			ViewModel.UpdateDate = DateTime.Now;
@@ -97,9 +98,12 @@ namespace MyKanban.ViewModels
 			if ((sourceTasks==this) && (dropInfo.InsertPosition == RelativeInsertPosition.AfterTargetItem)) insertIndex = dropInfo.InsertIndex - 1;
 			else insertIndex = dropInfo.InsertIndex;
 
-			movedTask.StateID = this.state.StateID;
+			if (movedTask.StateID != this.state.StateID)
+			{
+				movedTask.StateID = this.state.StateID;
+				movedTask.UpdateDate = DateTime.Now;		// update date when stateid changed
+			}
 			movedTask.Index = insertIndex;
-			movedTask.UpdateDate = DateTime.Now;
 			await Database.UpdateAsync(movedTask.Model);
 
 			index = 0;
@@ -109,7 +113,7 @@ namespace MyKanban.ViewModels
 				if (task == movedTask) continue;
 
 				task.Index = index;
-				task.UpdateDate = DateTime.Now;
+				//task.UpdateDate = DateTime.Now;
 				index++;
 
 				
